@@ -6,7 +6,7 @@ if(port == null || port == ""){
 }
 
 http.createServer((request, response) => {
-  response.write('<h1>Hello World!</h1>');
+  response.write('<!DOCTYPE html><html>'+'<h1>Hello World!</h1>');
   let body = [];
   let {method, url} = request;
   let {headers} = request;
@@ -18,6 +18,6 @@ http.createServer((request, response) => {
     response.write('<p>METHOD:   '+method+'<br>'+
                     'URL:   '+url+'<br>'+
                     'USERAGENT:    '+ userAgent +'</p>'+'<br>'+body);
-    response.end();
+    response.end('</html>');
   });
 }).listen(port);
