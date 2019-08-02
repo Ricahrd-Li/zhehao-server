@@ -8,10 +8,16 @@ if(port == null || port == ""){
 http.createServer((request, response) => {
   response.write('<h1>Hello World!</h1>');
   let body = [];
+  let {method, url} = request;
+  let {headers} = request;
+  let userAgent = headers['user-agent'];
   request.on('data', (chunk) => {
     body.push(chunk);
   }).on('end', () => {
     body = Buffer.concat(body).toString();
-    response.end(body);
+    response.write('<p>METHOD:   '+method+'<br>'+
+                    'URL:   '+url+'<br>'+
+                    'USERAGENT:    '+ userAgent +'</p>'+'<br>'+body);
+    response.end();
   });
 }).listen(port);
